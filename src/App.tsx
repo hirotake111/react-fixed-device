@@ -2,35 +2,11 @@ import Device from "./component/Device/Device";
 import VideoUrl from "./assets/demo.mp4";
 
 import "./App.css";
-import { useState } from "react";
+import { usePosition, useSize } from "./hooks";
 
 function App() {
-  const [size, setSize] = useState<"sm" | "md" | "lg">("lg");
-  const [position, setPosition] = useState<
-    "bottomRight" | "bottomLeft" | "Center"
-  >("bottomRight");
-
-  const handleClickSize = () => {
-    switch (size) {
-      case "sm":
-        return setSize("lg");
-      case "md":
-        return setSize("sm");
-      default:
-        return setSize("md");
-    }
-  };
-
-  const handleClickPosition = () => {
-    switch (position) {
-      case "bottomLeft":
-        return setPosition("Center");
-      case "Center":
-        return setPosition("bottomRight");
-      default:
-        return setPosition("bottomLeft");
-    }
-  };
+  const { size, changeSize } = useSize();
+  const { position, changePosition } = usePosition();
 
   return (
     <>
@@ -52,8 +28,8 @@ function App() {
               height: "100%",
             }}
           >
-            <button onClick={handleClickSize}>size: {size}</button>
-            <button onClick={handleClickPosition}>position: {position}</button>
+            <button onClick={changeSize}>size: {size}</button>
+            <button onClick={changePosition}>position: {position}</button>
           </div>
         </header>
         <div className="section color1"></div>

@@ -17,14 +17,17 @@ interface SizeInPx {
   };
 }
 
+export type Size = "sm" | "md" | "lg";
+export type Position = "bottomRight" | "bottomLeft" | "Center";
+
 interface Props {
   src: string;
   poster?: string;
   type: "default" | "notch" | "glass";
   loop?: boolean;
   color?: string;
-  size?: "sm" | "md" | "lg";
-  position?: "bottomRight" | "bottomLeft" | "Center";
+  size?: Size;
+  position?: Position;
 }
 
 export default function Device({

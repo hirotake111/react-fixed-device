@@ -19,11 +19,12 @@ interface SizeInPx {
 
 export type Size = "sm" | "md" | "lg";
 export type Position = "bottomRight" | "bottomLeft" | "Center";
+export type DeviceType = "default" | "notch" | "glass";
 
 interface Props {
   src: string;
   poster?: string;
-  type: "default" | "notch" | "glass";
+  type: DeviceType;
   loop?: boolean;
   color?: string;
   size?: Size;

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Position, Size } from "./component/Device/Device";
+import { DeviceType, Position, Size } from "./component/Device/Device";
 
 export const useSize = () => {
   const [size, setSize] = useState<Size>("lg");
@@ -33,4 +33,21 @@ export const usePosition = () => {
   };
 
   return { position, changePosition };
+};
+
+export const useDeviceType = () => {
+  const [deviceType, setDeviceType] = useState<DeviceType>("default");
+
+  const changeDeviceType = () => {
+    switch (deviceType) {
+      case "notch":
+        return setDeviceType("glass");
+      case "glass":
+        return setDeviceType("default");
+      default:
+        return setDeviceType("notch");
+    }
+  };
+
+  return { deviceType, changeDeviceType };
 };

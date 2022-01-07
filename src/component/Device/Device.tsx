@@ -150,17 +150,22 @@ export default function Device({
   };
 
   return (
-    <div className="device" style={{ ...positionProps }}>
+    <div className="reactFixedDevice" style={{ ...positionProps }}>
       {/** play button */}
-      <div className="playbutton" onClick={handleClick}>
-        <div className="playButton__container">
-          {paused && <img src={playButton} className="playButton__image" />}
+      <div className="reactFixedDevice__playbutton" onClick={handleClick}>
+        <div className="reactFixedDevice__playButton__container">
+          {paused && (
+            <img
+              src={playButton}
+              className="reactFixedDevice__playButton__image"
+            />
+          )}
         </div>
       </div>
 
-      <div className="device__container">
+      <div className="reactFixedDevice__container">
         <div
-          className={"device__frame"}
+          className={"reactFixedDevice__frame"}
           style={{
             backgroundColor: backgroundColor,
             width: sizeInPx.frame.width,
@@ -171,7 +176,7 @@ export default function Device({
         >
           {type === "notch" && (
             <div
-              className={"device__notch"}
+              className={"reactFixedDevice__notch"}
               style={{
                 backgroundColor: backgroundColor,
                 height: sizeInPx.notch.height,
@@ -180,7 +185,7 @@ export default function Device({
             ></div>
           )}
           <div
-            className="device__screen"
+            className="reactFixedDevice__screen"
             style={{
               borderRadius: sizeInPx.screen.borderRadius,
             }}

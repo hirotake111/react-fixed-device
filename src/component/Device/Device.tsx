@@ -1,7 +1,15 @@
-import { CSSProperties, useMemo } from "react";
-import "./Device.css";
+import {
+  CSSProperties,
+  MouseEventHandler,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 
-interface SizeInPx {
+import "./Device.css";
+import playButton from "./play.svg";
+
+export interface SizeInPx {
   frame: {
     width: string;
     height: string;
@@ -40,6 +48,9 @@ export default function Device({
   size,
   position,
 }: Props) {
+  const ref = useRef<HTMLVideoElement>(null);
+  const [paused, setPaused] = useState(false);
+
   const backgroundColor = useMemo(() => {
     return type === "glass"
       ? "rgba(255, 255, 255, 0.25)" // if glass is specified, use glass color (not value 'color)
@@ -122,8 +133,29 @@ export default function Device({
     }
   }, [position, sizeInPx]);
 
+  const handleClick: MouseEventHandler<HTMLDivElement> = (e) => {
+    if (!ref.current) {
+      console.log("ref.current is null.");
+      return;
+    }
+    if (ref.current.paused) {
+      ref.current.play();
+      setPaused(false);
+      return;
+    }
+    ref.current.pause();
+    setPaused(true);
+  };
+
   return (
     <div className="device" style={{ ...positionProps }}>
+      {/** play button */}
+      <div className="playbutton" onClick={handleClick}>
+        <div className="playButton__container">
+          {paused && <img src={playButton} className="playButton__image" />}
+        </div>
+      </div>
+
       <div className="device__container">
         <div
           className={"device__frame"}
@@ -151,7 +183,15 @@ export default function Device({
               borderRadius: sizeInPx.screen.borderRadius,
             }}
           >
-            <video src={src} poster={poster} autoPlay muted loop={loop}></video>
+            {/** vieo element */}
+            <video
+              src={src}
+              poster={poster}
+              autoPlay
+              muted
+              loop={loop}
+              ref={ref}
+            ></video>
           </div>
         </div>
       </div>

@@ -212,6 +212,7 @@ export default function Device({
               muted
               loop={loop}
               ref={ref}
+              style={{ objectFit: "cover" }}
             ></video>
           </div>
         </div>

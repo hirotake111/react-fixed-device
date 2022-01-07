@@ -16,6 +16,7 @@ function App() {
         type={deviceType}
         color="#184e77"
         loop
+        autoPlay
         size={size}
         position={position}
       />

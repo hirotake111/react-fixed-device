@@ -36,6 +36,7 @@ interface Props {
   loop?: boolean;
   color?: string;
   size?: Size;
+  autoPlay?: boolean;
   position?: Position;
 }
 
@@ -44,12 +45,13 @@ export default function Device({
   type,
   poster,
   loop,
+  autoPlay,
   color,
   size,
   position,
 }: Props) {
   const ref = useRef<HTMLVideoElement>(null);
-  const [paused, setPaused] = useState(false);
+  const [paused, setPaused] = useState(!autoPlay);
 
   const backgroundColor = useMemo(() => {
     return type === "glass"
@@ -187,7 +189,7 @@ export default function Device({
             <video
               src={src}
               poster={poster}
-              autoPlay
+              autoPlay={autoPlay}
               muted
               loop={loop}
               ref={ref}

@@ -16,7 +16,8 @@
     "build_old": "tsc && vite build",
     "build": "rm -rf dist && cp -r src/lib dist",
     "preview": "vite preview",
-    "test": "jest --watch"
+    "test": "jest --watch",
+    "coverage": "rm -rf coverage && jest --coverage"
   },
   "dependencies": {},
   "devDependencies": {
@@ -25,6 +26,7 @@
     "@babel/preset-react": "^7.16.7",
     "@babel/preset-typescript": "^7.16.7",
     "@testing-library/react": "^12.1.2",
+    "@testing-library/react-hooks": "^7.0.2",
     "@types/jest": "^27.4.0",
     "@types/react": "^17.0.38",
     "@types/react-dom": "^17.0.10",

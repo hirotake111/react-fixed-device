@@ -8,16 +8,13 @@ export const useVideoPlay = (autoPlay: boolean | undefined) => {
    * plays video if it's paused, else stop it.
    */
   const play = () => {
-    if (!ref.current) {
-      console.log("ref.current is null.");
-      return;
-    }
-    if (ref.current.paused) {
-      ref.current.play();
+    const video = ref.current!;
+    if (paused) {
+      video.play();
       setPaused(false);
       return;
     }
-    ref.current.pause();
+    video.pause();
     setPaused(true);
   };
 
@@ -110,7 +107,7 @@ export const useSizeAndPosition = ({
           left: "32px",
           bottom: "32px",
         };
-      case "Center":
+      case "center":
         return {
           top: `calc(50% - ${sizeInPx.frame.height} / 2)`,
           left: `calc(50%  - ${sizeInPx.frame.width} / 2)`,

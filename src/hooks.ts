@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { DeviceType, Position, Size } from "./component/Device/Device";
+import { DeviceType, Position, Size } from "./lib/component/Device";
 
 export const useSize = () => {
   const [size, setSize] = useState<Size>("lg");

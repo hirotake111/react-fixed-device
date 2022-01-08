@@ -13,7 +13,8 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build_old": "tsc && vite build",
+    "build": "rm -rf dist && cp -r src/lib dist",
     "preview": "vite preview",
     "test": "jest --watch"
   },

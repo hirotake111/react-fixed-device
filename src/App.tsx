@@ -1,4 +1,4 @@
-import Device from "./component/Device/Device";
+import Device from "./lib/component/Device";
 import VideoUrl from "./assets/demo.mp4";
 
 import "./App.css";

@@ -5,7 +5,6 @@ import {
   useRef,
   useState,
 } from "react";
-
 import "./Device.css";
 
 export interface SizeInPx {

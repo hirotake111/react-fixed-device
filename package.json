@@ -14,7 +14,7 @@
   "scripts": {
     "dev": "vite",
     "build_old": "tsc && vite build",
-    "build": "rm -rf dist && cp -r src/lib dist",
+    "build": "jest && rm -rf dist && cp -r src/lib dist",
     "preview": "vite preview",
     "test": "jest --watch",
     "coverage": "rm -rf coverage && jest --coverage"

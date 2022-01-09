@@ -18,6 +18,7 @@ interface Props {
   autoPlay?: boolean;
   position?: Position;
   draggable?: boolean;
+  onVideoEnd?: () => void;
 }
 
 export default function Device({
@@ -30,6 +31,7 @@ export default function Device({
   size,
   position,
   draggable,
+  onVideoEnd,
 }: Props) {
   const { ref, paused, play } = useVideoPlay(autoPlay);
   const { backgroundColor } = useBackgroundColor({ type, color });
@@ -81,6 +83,7 @@ export default function Device({
               loop={loop}
               ref={ref}
               style={{ objectFit: "cover" }}
+              onEnded={onVideoEnd}
             ></video>
           </div>
         </div>

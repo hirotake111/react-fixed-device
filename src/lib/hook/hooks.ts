@@ -1,11 +1,4 @@
-import {
-  CSSProperties,
-  MouseEventHandler,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
+import { CSSProperties, useEffect, useMemo, useRef, useState } from "react";
 import { DeviceType, Position, Size, SizeInPx } from "../types";
 
 export const useVideoPlay = (autoPlay: boolean | undefined) => {
@@ -138,14 +131,13 @@ export const useDragAndDrop = (draggable: boolean | undefined) => {
 
   useEffect(() => {
     const div = ref.current;
-    // if div is not defined, do nothing
     if (!div) return;
+    if (!draggable) return;
 
     /**
      * set offsetX and Y, then add mousemove event listener
      */
     const onMouseDown = (e: MouseEvent) => {
-      if (!draggable) return;
       offsetX = e.offsetX;
       offsetY = e.offsetY;
       div.addEventListener("mousemove", onMouseMove);
@@ -167,7 +159,6 @@ export const useDragAndDrop = (draggable: boolean | undefined) => {
      * this removes mousemove event listener
      */
     const onMouseUp = (e: MouseEvent) => {
-      if (!draggable) return;
       // console.log("mouseup!");
       div.removeEventListener("mousemove", onMouseMove);
     };

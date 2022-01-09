@@ -16,12 +16,13 @@ function App() {
         src={VideoUrl}
         type={deviceType}
         color="#184e77"
-        // loop
-        // autoPlay
+        loop
+        autoPlay
+        control
         draggable={draggable}
         size={size}
         position={position}
-        onVideoEnd={() => console.log("vide ends!")}
+        onVideoEnd={() => console.log("video ends!")}
       />
       <div className="app">
         <header className="header">

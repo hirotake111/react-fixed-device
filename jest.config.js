@@ -1,5 +1,6 @@
 module.exports = {
   moduleFileExtensions: ["js", "jsx", "ts", "tsx"],
+  collectCoverageFrom: ["src/lib/**/*.{ts,tsx}"],
   transform: {
     "^.+\\.(ts|tsx)$": "ts-jest",
   },

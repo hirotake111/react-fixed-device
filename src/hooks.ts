@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { DeviceType, Position, Size } from "./component/Device/Device";
+import { DeviceType, Position, Size } from "./lib/types";
 
 export const useSize = () => {
   const [size, setSize] = useState<Size>("lg");
@@ -24,8 +24,8 @@ export const usePosition = () => {
   const changePosition = () => {
     switch (position) {
       case "bottomLeft":
-        return setPosition("Center");
-      case "Center":
+        return setPosition("center");
+      case "center":
         return setPosition("bottomRight");
       default:
         return setPosition("bottomLeft");
@@ -50,4 +50,12 @@ export const useDeviceType = () => {
   };
 
   return { deviceType, changeDeviceType };
+};
+
+export const useDrag = () => {
+  const [draggable, setDraggable] = useState(false);
+  const toggleDraggable = () => {
+    setDraggable(!draggable);
+  };
+  return { draggable, toggleDraggable };
 };

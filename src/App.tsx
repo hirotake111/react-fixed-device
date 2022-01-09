@@ -1,13 +1,14 @@
-import Device from "./component/Device/Device";
+import Device from "./lib/component/Device/Device";
 import VideoUrl from "./assets/demo.mp4";
 
 import "./App.css";
-import { useDeviceType, usePosition, useSize } from "./hooks";
+import { useDeviceType, useDrag, usePosition, useSize } from "./hooks";
 
 function App() {
   const { size, changeSize } = useSize();
   const { position, changePosition } = usePosition();
   const { deviceType, changeDeviceType } = useDeviceType();
+  const { draggable, toggleDraggable } = useDrag();
 
   return (
     <>
@@ -16,6 +17,8 @@ function App() {
         type={deviceType}
         color="#184e77"
         loop
+        // autoPlay
+        draggable={draggable}
         size={size}
         position={position}
       />
@@ -32,6 +35,9 @@ function App() {
             <button onClick={changeSize}>size: {size}</button>
             <button onClick={changePosition}>position: {position}</button>
             <button onClick={changeDeviceType}>type: {deviceType}</button>
+            <button onClick={toggleDraggable}>
+              draggable: {draggable ? "true" : "false"}
+            </button>
           </div>
         </header>
         <div className="section color1"></div>

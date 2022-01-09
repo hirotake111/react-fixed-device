@@ -1,19 +1,41 @@
 {
   "name": "react-fixed-device",
-  "version": "0.0.0",
+  "version": "0.0.4",
+  "main": "dist/index.tsx",
+  "module": "dist/index.tsx",
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hirotake111/react-fixed-device"
+  },
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
-    "preview": "vite preview"
+    "build_old": "tsc && vite build",
+    "build": "rm -rf dist && cp -r src/lib dist",
+    "preview": "vite preview",
+    "test": "jest --watch",
+    "coverage": "rm -rf coverage && jest --coverage"
   },
-  "dependencies": {
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2"
-  },
+  "dependencies": {},
   "devDependencies": {
-    "@types/react": "^17.0.33",
+    "@babel/core": "^7.16.7",
+    "@babel/preset-env": "^7.16.7",
+    "@babel/preset-react": "^7.16.7",
+    "@babel/preset-typescript": "^7.16.7",
+    "@testing-library/react": "^12.1.2",
+    "@testing-library/react-hooks": "^7.0.2",
+    "@types/jest": "^27.4.0",
+    "@types/react": "^17.0.38",
     "@types/react-dom": "^17.0.10",
     "@vitejs/plugin-react": "^1.0.7",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^27.4.7",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "ts-jest": "^27.1.2",
     "typescript": "^4.4.4",
     "vite": "^2.7.2"
   }

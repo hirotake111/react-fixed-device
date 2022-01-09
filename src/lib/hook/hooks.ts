@@ -1,4 +1,11 @@
-import { CSSProperties, useMemo, useRef, useState } from "react";
+import {
+  CSSProperties,
+  MouseEventHandler,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { DeviceType, Position, Size, SizeInPx } from "../types";
 
 export const useVideoPlay = (autoPlay: boolean | undefined) => {
@@ -8,6 +15,7 @@ export const useVideoPlay = (autoPlay: boolean | undefined) => {
    * plays video if it's paused, else stop it.
    */
   const play = () => {
+    // console.log("play!");
     const video = ref.current!;
     if (paused) {
       video.play();
@@ -51,50 +59,50 @@ export const useSizeAndPosition = ({
       case "sm":
         return {
           frame: {
-            width: "60px",
-            height: "120px",
-            borderRadius: "14px",
-            padding: "4px",
+            width: 60,
+            height: 120,
+            borderRadius: 14,
+            padding: 4,
           },
           notch: {
-            height: "8px",
-            borderRadius: "0 0 4px 4px",
+            height: 8,
+            borderRadius: 4,
           },
           screen: {
-            borderRadius: "10px",
+            borderRadius: 10,
           },
         };
       case "md":
         return {
           frame: {
-            width: "120px",
-            height: "240px",
-            borderRadius: "22px",
-            padding: "6px",
+            width: 120,
+            height: 240,
+            borderRadius: 22,
+            padding: 6,
           },
           notch: {
-            height: "12px",
-            borderRadius: "0 0 8px 8px",
+            height: 12,
+            borderRadius: 8,
           },
           screen: {
-            borderRadius: "16px",
+            borderRadius: 16,
           },
         };
 
       default:
         return {
           frame: {
-            width: "240px",
-            height: "480px",
-            borderRadius: "32px",
-            padding: "8px",
+            width: 240,
+            height: 480,
+            borderRadius: 32,
+            padding: 8,
           },
           notch: {
-            height: "24px",
-            borderRadius: "0 0 16px 16px",
+            height: 24,
+            borderRadius: 16,
           },
           screen: {
-            borderRadius: "24px",
+            borderRadius: 24,
           },
         };
     }
@@ -104,21 +112,77 @@ export const useSizeAndPosition = ({
     switch (position) {
       case "bottomLeft":
         return {
+          top: `calc(100vh - (${sizeInPx.frame.height}px + 32px))`,
           left: "32px",
-          bottom: "32px",
         };
       case "center":
         return {
-          top: `calc(50% - ${sizeInPx.frame.height} / 2)`,
-          left: `calc(50%  - ${sizeInPx.frame.width} / 2)`,
+          top: `calc(50% - ${sizeInPx.frame.height}px / 2)`,
+          left: `calc(50%  - ${sizeInPx.frame.width}px / 2)`,
         };
       default:
+        const value = window.innerWidth - 64 - sizeInPx.frame.width;
         return {
-          right: "32px",
-          bottom: "32px",
+          top: `calc(100vh - (${sizeInPx.frame.height}px + 32px))`,
+          left: `calc(100vw - (${sizeInPx.frame.width}px + 64px))`,
         };
     }
   }, [position, sizeInPx]);
 
   return { sizeInPx, positionProps };
+};
+
+export const useDragAndDrop = (draggable: boolean | undefined) => {
+  const ref = useRef<HTMLDivElement>(null);
+  let offsetX: number, offsetY: number;
+
+  useEffect(() => {
+    const div = ref.current;
+    // if div is not defined, do nothing
+    if (!div) return;
+
+    /**
+     * set offsetX and Y, then add mousemove event listener
+     */
+    const onMouseDown = (e: MouseEvent) => {
+      if (!draggable) return;
+      offsetX = e.offsetX;
+      offsetY = e.offsetY;
+      div.addEventListener("mousemove", onMouseMove);
+    };
+
+    /**
+     * updates div.style.left
+     */
+    const onMouseMove = (e: MouseEvent) => {
+      if (e.clientX > 0) {
+        div.style.left = `${e.pageX - offsetX}px`;
+      }
+      if (e.clientY > 0) {
+        div.style.top = `${e.pageY - offsetY}px`;
+      }
+    };
+
+    /**
+     * this removes mousemove event listener
+     */
+    const onMouseUp = (e: MouseEvent) => {
+      if (!draggable) return;
+      // console.log("mouseup!");
+      div.removeEventListener("mousemove", onMouseMove);
+    };
+
+    // add event listener
+    div.addEventListener("mousedown", onMouseDown);
+    div.addEventListener("mouseup", onMouseUp);
+
+    return () => {
+      // remove all event listener
+      div.removeEventListener("mousedown", onMouseDown);
+      div.removeEventListener("mousemove", onMouseMove);
+      div.removeEventListener("mouseup", onMouseUp);
+    };
+  }, [ref, draggable]);
+
+  return ref;
 };

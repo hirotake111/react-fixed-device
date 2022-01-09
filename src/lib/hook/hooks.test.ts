@@ -82,22 +82,22 @@ describe("useSizeAndPosition", () => {
     } = renderHook(() => useSizeAndPosition({}));
     expect(current.sizeInPx).toEqual({
       frame: {
-        width: "240px",
-        height: "480px",
-        borderRadius: "32px",
-        padding: "8px",
+        width: 240,
+        height: 480,
+        borderRadius: 32,
+        padding: 8,
       },
       notch: {
-        height: "24px",
-        borderRadius: "0 0 16px 16px",
+        height: 24,
+        borderRadius: 16,
       },
       screen: {
-        borderRadius: "24px",
+        borderRadius: 24,
       },
     });
     expect(current.positionProps).toEqual({
-      right: "32px",
-      bottom: "32px",
+      left: "calc(100vw - (240px + 64px))",
+      top: "calc(100vh - (480px + 32px))",
     });
   });
 
@@ -108,22 +108,22 @@ describe("useSizeAndPosition", () => {
     } = renderHook(() => useSizeAndPosition({ size: "sm" }));
     expect(current.sizeInPx).toEqual({
       frame: {
-        width: "60px",
-        height: "120px",
-        borderRadius: "14px",
-        padding: "4px",
+        width: 60,
+        height: 120,
+        borderRadius: 14,
+        padding: 4,
       },
       notch: {
-        height: "8px",
-        borderRadius: "0 0 4px 4px",
+        height: 8,
+        borderRadius: 4,
       },
       screen: {
-        borderRadius: "10px",
+        borderRadius: 10,
       },
     });
     expect(current.positionProps).toEqual({
-      right: "32px",
-      bottom: "32px",
+      left: "calc(100vw - (60px + 64px))",
+      top: "calc(100vh - (120px + 32px))",
     });
   });
 });
@@ -135,22 +135,22 @@ it("should return medium size and position", () => {
   } = renderHook(() => useSizeAndPosition({ size: "md" }));
   expect(current.sizeInPx).toEqual({
     frame: {
-      width: "120px",
-      height: "240px",
-      borderRadius: "22px",
-      padding: "6px",
+      width: 120,
+      height: 240,
+      borderRadius: 22,
+      padding: 6,
     },
     notch: {
-      height: "12px",
-      borderRadius: "0 0 8px 8px",
+      height: 12,
+      borderRadius: 8,
     },
     screen: {
-      borderRadius: "16px",
+      borderRadius: 16,
     },
   });
   expect(current.positionProps).toEqual({
-    right: "32px",
-    bottom: "32px",
+    left: "calc(100vw - (120px + 64px))",
+    top: "calc(100vh - (240px + 32px))",
   });
 });
 
@@ -163,22 +163,22 @@ it("should update positionProps if postion is 'bottomLeft'", () => {
   );
   expect(current.sizeInPx).toEqual({
     frame: {
-      width: "120px",
-      height: "240px",
-      borderRadius: "22px",
-      padding: "6px",
+      width: 120,
+      height: 240,
+      borderRadius: 22,
+      padding: 6,
     },
     notch: {
-      height: "12px",
-      borderRadius: "0 0 8px 8px",
+      height: 12,
+      borderRadius: 8,
     },
     screen: {
-      borderRadius: "16px",
+      borderRadius: 16,
     },
   });
   expect(current.positionProps).toEqual({
     left: "32px",
-    bottom: "32px",
+    top: "calc(100vh - (240px + 32px))",
   });
 });
 
@@ -189,17 +189,17 @@ it("should change positionProps if position is 'Center", () => {
   } = renderHook(() => useSizeAndPosition({ size: "md", position: "center" }));
   expect(current.sizeInPx).toEqual({
     frame: {
-      width: "120px",
-      height: "240px",
-      borderRadius: "22px",
-      padding: "6px",
+      width: 120,
+      height: 240,
+      borderRadius: 22,
+      padding: 6,
     },
     notch: {
-      height: "12px",
-      borderRadius: "0 0 8px 8px",
+      height: 12,
+      borderRadius: 8,
     },
     screen: {
-      borderRadius: "16px",
+      borderRadius: 16,
     },
   });
   expect(current.positionProps).toEqual({

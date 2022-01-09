@@ -1,5 +1,6 @@
 import {
   useBackgroundColor,
+  useDragAndDrop,
   useSizeAndPosition,
   useVideoPlay,
 } from "../../hook/hooks";
@@ -16,6 +17,7 @@ interface Props {
   size?: Size;
   autoPlay?: boolean;
   position?: Position;
+  draggable?: boolean;
 }
 
 export default function Device({
@@ -27,13 +29,15 @@ export default function Device({
   color,
   size,
   position,
+  draggable,
 }: Props) {
   const { ref, paused, play } = useVideoPlay(autoPlay);
   const { backgroundColor } = useBackgroundColor({ type, color });
   const { sizeInPx, positionProps } = useSizeAndPosition({ size, position });
+  const divRef = useDragAndDrop(draggable);
 
   return (
-    <div className="reactFixedDevice" style={{ ...positionProps }}>
+    <div ref={divRef} className="reactFixedDevice" style={{ ...positionProps }}>
       {/** play button */}
       <div className="reactFixedDevice__playbutton" onClick={play}>
         <div className="reactFixedDevice__playButton__container">
@@ -58,7 +62,7 @@ export default function Device({
               style={{
                 backgroundColor: backgroundColor,
                 height: sizeInPx.notch.height,
-                borderRadius: sizeInPx.notch.borderRadius,
+                borderRadius: `0 0 ${sizeInPx.notch.borderRadius}px ${sizeInPx.notch.borderRadius}px`,
               }}
             ></div>
           )}

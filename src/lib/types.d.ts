@@ -1,16 +1,16 @@
 export interface SizeInPx {
   frame: {
-    width: string;
-    height: string;
-    borderRadius: string;
-    padding: string;
+    width: number;
+    height: number;
+    borderRadius: number;
+    padding: number;
   };
   notch: {
-    height: string;
-    borderRadius: string;
+    height: number;
+    borderRadius: number;
   };
   screen: {
-    borderRadius: string;
+    borderRadius: number;
   };
 }
 

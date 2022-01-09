@@ -1,6 +1,7 @@
 .reactFixedDevice {
   position: fixed;
   z-index: 1;
+  /* transition: 0.2s; */
 }
 
 .reactFixedDevice__container {
@@ -19,7 +20,7 @@
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   backdrop-filter: blur(5.5px);
   -webkit-backdrop-filter: blur(5.5px);
-  transition: 0.2s;
+  /* transition: 0.2s; */
 }
 
 .reactFixedDevice__notch {

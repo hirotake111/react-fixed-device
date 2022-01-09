@@ -5,6 +5,8 @@ A custom device-shaped component that will play video file
 - Simple usage
 - Currently React TypeScript only
 
+![demo](https://j.gifs.com/VvoQqW.gif)
+
 ### Installation
 
 ```bash

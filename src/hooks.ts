@@ -2,7 +2,7 @@ import { useState } from "react";
 import { DeviceType, Position, Size } from "./lib/types";
 
 export const useSize = () => {
-  const [size, setSize] = useState<Size>("lg");
+  const [size, setSize] = useState<Size>("md");
 
   const changeSize = () => {
     switch (size) {

@@ -17,10 +17,12 @@ function App() {
         type={deviceType}
         color="#184e77"
         loop
-        // autoPlay
+        autoPlay
+        control
         draggable={draggable}
         size={size}
         position={position}
+        onVideoEnd={() => console.log("video ends!")}
       />
       <div className="app">
         <header className="header">

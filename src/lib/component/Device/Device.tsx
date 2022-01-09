@@ -16,22 +16,26 @@ interface Props {
   color?: string;
   size?: Size;
   autoPlay?: boolean;
+  control?: boolean;
   position?: Position;
   draggable?: boolean;
+  onVideoEnd?: () => void;
 }
 
 export default function Device({
   src,
   type,
   poster,
-  loop,
-  autoPlay,
+  loop = false,
+  autoPlay = false,
+  control = false,
   color,
-  size,
+  size = "md",
   position,
-  draggable,
+  draggable = false,
+  onVideoEnd,
 }: Props) {
-  const { ref, paused, play } = useVideoPlay(autoPlay);
+  const { ref, paused, play } = useVideoPlay(autoPlay, control);
   const { backgroundColor } = useBackgroundColor({ type, color });
   const { sizeInPx, positionProps } = useSizeAndPosition({ size, position });
   const divRef = useDragAndDrop(draggable);
@@ -81,6 +85,7 @@ export default function Device({
               loop={loop}
               ref={ref}
               style={{ objectFit: "cover" }}
+              onEnded={onVideoEnd}
             ></video>
           </div>
         </div>

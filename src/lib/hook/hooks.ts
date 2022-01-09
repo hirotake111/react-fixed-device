@@ -1,21 +1,14 @@
-import {
-  CSSProperties,
-  MouseEventHandler,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
+import { CSSProperties, useEffect, useMemo, useRef, useState } from "react";
 import { DeviceType, Position, Size, SizeInPx } from "../types";
 
-export const useVideoPlay = (autoPlay: boolean | undefined) => {
+export const useVideoPlay = (autoPlay: boolean, control: boolean) => {
   const ref = useRef<HTMLVideoElement>(null);
   const [paused, setPaused] = useState(!autoPlay);
   /**
    * plays video if it's paused, else stop it.
    */
   const play = () => {
-    // console.log("play!");
+    if (!control) return;
     const video = ref.current!;
     if (paused) {
       video.play();
@@ -112,7 +105,7 @@ export const useSizeAndPosition = ({
     switch (position) {
       case "bottomLeft":
         return {
-          top: `calc(100vh - (${sizeInPx.frame.height}px + 32px))`,
+          top: `calc(100vh - (${sizeInPx.frame.height}px + 64px))`,
           left: "32px",
         };
       case "center":
@@ -123,7 +116,7 @@ export const useSizeAndPosition = ({
       default:
         const value = window.innerWidth - 64 - sizeInPx.frame.width;
         return {
-          top: `calc(100vh - (${sizeInPx.frame.height}px + 32px))`,
+          top: `calc(100vh - (${sizeInPx.frame.height}px + 64px))`,
           left: `calc(100vw - (${sizeInPx.frame.width}px + 64px))`,
         };
     }
@@ -132,20 +125,19 @@ export const useSizeAndPosition = ({
   return { sizeInPx, positionProps };
 };
 
-export const useDragAndDrop = (draggable: boolean | undefined) => {
+export const useDragAndDrop = (draggable: boolean) => {
   const ref = useRef<HTMLDivElement>(null);
   let offsetX: number, offsetY: number;
 
   useEffect(() => {
     const div = ref.current;
-    // if div is not defined, do nothing
     if (!div) return;
+    if (!draggable) return;
 
     /**
      * set offsetX and Y, then add mousemove event listener
      */
     const onMouseDown = (e: MouseEvent) => {
-      if (!draggable) return;
       offsetX = e.offsetX;
       offsetY = e.offsetY;
       div.addEventListener("mousemove", onMouseMove);
@@ -167,7 +159,6 @@ export const useDragAndDrop = (draggable: boolean | undefined) => {
      * this removes mousemove event listener
      */
     const onMouseUp = (e: MouseEvent) => {
-      if (!draggable) return;
       // console.log("mouseup!");
       div.removeEventListener("mousemove", onMouseMove);
     };

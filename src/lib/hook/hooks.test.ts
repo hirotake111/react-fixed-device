@@ -26,7 +26,7 @@ beforeEach(() => {
 describe("useVideoPlay", () => {
   test("if value paused is true, play() should perform video.play() and set the value paused false", () => {
     expect.assertions(4);
-    const { result } = renderHook(() => useVideoPlay(false));
+    const { result } = renderHook(() => useVideoPlay(false, true));
     expect(result.current.paused).toBe(true);
     // when you run hook, you need to wrap it with act(), otherwise get a error
     act(() => {
@@ -39,15 +39,15 @@ describe("useVideoPlay", () => {
 
   test("if value paused is false, play() should perform video.pause() and the value paused remains false", () => {
     expect.assertions(4);
-    const { result } = renderHook(() => useVideoPlay(true));
+    const { result } = renderHook(() => useVideoPlay(true, true));
     expect(result.current.paused).toBe(false);
     // when you run hook, you need to wrap it with act(), otherwise get a error
     act(() => {
       result.current.play();
     });
+    expect(result.current.paused).toBe(true);
     expect(mockPlay).toHaveBeenCalledTimes(0);
     expect(mockPause).toHaveBeenCalledTimes(1);
-    expect(result.current.paused).toBe(true);
   });
 });
 
@@ -97,7 +97,7 @@ describe("useSizeAndPosition", () => {
     });
     expect(current.positionProps).toEqual({
       left: "calc(100vw - (240px + 64px))",
-      top: "calc(100vh - (480px + 32px))",
+      top: "calc(100vh - (480px + 64px))",
     });
   });
 
@@ -123,7 +123,7 @@ describe("useSizeAndPosition", () => {
     });
     expect(current.positionProps).toEqual({
       left: "calc(100vw - (60px + 64px))",
-      top: "calc(100vh - (120px + 32px))",
+      top: "calc(100vh - (120px + 64px))",
     });
   });
 });
@@ -150,7 +150,7 @@ it("should return medium size and position", () => {
   });
   expect(current.positionProps).toEqual({
     left: "calc(100vw - (120px + 64px))",
-    top: "calc(100vh - (240px + 32px))",
+    top: "calc(100vh - (240px + 64px))",
   });
 });
 
@@ -178,7 +178,7 @@ it("should update positionProps if postion is 'bottomLeft'", () => {
   });
   expect(current.positionProps).toEqual({
     left: "32px",
-    top: "calc(100vh - (240px + 32px))",
+    top: "calc(100vh - (240px + 64px))",
   });
 });
 

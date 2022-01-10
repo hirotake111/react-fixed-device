@@ -112,6 +112,7 @@ export default function Device({
         >
           {type === "notch" && (
             <div
+              aria-label="notch"
               style={{
                 ...styles.reactFixedDevice__notch,
                 backgroundColor: backgroundColor,

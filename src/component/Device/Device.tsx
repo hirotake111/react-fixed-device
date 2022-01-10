@@ -1,3 +1,4 @@
+import { CSSProperties } from "react";
 import {
   useBackgroundColor,
   useDragAndDrop,
@@ -6,7 +7,56 @@ import {
 } from "../../hook/hooks";
 import { DeviceType, Position, Size } from "../../types";
 import PlayIcon from "../PlayIcon/PlayIcon";
-import "./Device.css";
+
+const styles: { [key: string]: CSSProperties } = {
+  reactFixedDevice: { position: "fixed", zIndex: 1 },
+  reactFixedDevice__container: {
+    position: "relative",
+    width: "100%",
+    height: "100%",
+  },
+  reactFixedDevice__frame: {
+    display: "flex",
+    justifyContent: "center",
+    padding: "8px",
+    width: "240px",
+    height: "480px",
+    borderRadius: "32px",
+    boxShadow: "0 8px 32px 0 rgba(31, 38, 135, 0.37)",
+    backdropFilter: "blur(5.5px)",
+    WebkitBackdropFilter: "blur(5.5px)",
+  },
+  reactFixedDevice__notch: {
+    position: "absolute",
+    width: "50%",
+    height: "24px",
+    borderRadius: "0 0 16px 16px",
+  },
+  reactFixedDevice__screen: {
+    display: "flex",
+    justifyContent: "center",
+    width: "100%",
+    height: "100%",
+    borderRadius: "24px",
+    backgroundColor: "#000",
+    overflow: "hidden",
+  },
+  reactFixedDevice__playbutton: {
+    position: "absolute",
+    zIndex: 1,
+    width: "100%",
+    height: "100%",
+    cursor: "pointer",
+  },
+  reactFixedDevice__playButton__container: {
+    position: "relative",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    width: "100%",
+    height: "100%",
+  },
+};
 
 interface Props {
   src: string;
@@ -41,18 +91,18 @@ export default function Device({
   const divRef = useDragAndDrop(draggable);
 
   return (
-    <div ref={divRef} className="reactFixedDevice" style={{ ...positionProps }}>
+    <div ref={divRef} style={{ ...styles.reactFixedDevice, ...positionProps }}>
       {/** play button */}
-      <div className="reactFixedDevice__playbutton" onClick={play}>
-        <div className="reactFixedDevice__playButton__container">
+      <div style={styles.reactFixedDevice__playbutton} onClick={play}>
+        <div style={styles.reactFixedDevice__playButton__container}>
           {paused && <PlayIcon />}
         </div>
       </div>
 
-      <div className="reactFixedDevice__container">
+      <div style={styles.reactFixedDevice__container}>
         <div
-          className={"reactFixedDevice__frame"}
           style={{
+            ...styles.reactFixedDevice__frame,
             backgroundColor: backgroundColor,
             width: sizeInPx.frame.width,
             height: sizeInPx.frame.height,
@@ -62,8 +112,9 @@ export default function Device({
         >
           {type === "notch" && (
             <div
-              className={"reactFixedDevice__notch"}
+              aria-label="notch"
               style={{
+                ...styles.reactFixedDevice__notch,
                 backgroundColor: backgroundColor,
                 height: sizeInPx.notch.height,
                 borderRadius: `0 0 ${sizeInPx.notch.borderRadius}px ${sizeInPx.notch.borderRadius}px`,
@@ -71,8 +122,8 @@ export default function Device({
             ></div>
           )}
           <div
-            className="reactFixedDevice__screen"
             style={{
+              ...styles.reactFixedDevice__screen,
               borderRadius: sizeInPx.screen.borderRadius,
             }}
           >

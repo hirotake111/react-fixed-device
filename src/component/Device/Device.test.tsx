@@ -9,8 +9,6 @@ it("should have video element", () => {
 });
 
 it("should have notch if type is 'notch'", () => {
-  const { container } = render(<Device src="xxx.mp4" type="notch" />);
-  expect(
-    container.getElementsByClassName("reactFixedDevice__notch").length
-  ).toBe(1);
+  const { getByLabelText } = render(<Device src="xxx.mp4" type="notch" />);
+  expect(getByLabelText("notch").tagName).toBe("DIV");
 });

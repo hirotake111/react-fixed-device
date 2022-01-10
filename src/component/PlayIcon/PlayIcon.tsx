@@ -1,9 +1,15 @@
-import "./PlayIcon.css";
+const styles = {
+  reactFixedDevice__playButton__image: {
+    width: "50%",
+    fill: "#fff",
+  },
+};
 
 export default function PlayIcon() {
   return (
     <svg
-      className="reactFixedDevice__playButton__image"
+      // className={styles.reactFixedDevice__playButton__image}
+      style={styles.reactFixedDevice__playButton__image}
       version="1.1"
       id="play"
       xmlns="http://www.w3.org/2000/svg"

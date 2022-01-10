@@ -52,6 +52,15 @@ export const App() {
 - if you set type "glass", color prop will not be honored.
 - if you set loop true, onVideEnd will not be performed.
 
+### Development notes
+
+```bash
+cd node_modules/react-dom && yarn link
+cd ../react-dom/ && yarn link
+
+cd ../../example && yarn link react && yarn react-dom
+```
+
 ### License
 
 MIT

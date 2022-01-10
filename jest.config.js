@@ -15,5 +15,5 @@ module.exports = {
     "\\.(css|less)$": "identity-obj-proxy",
   },
   testEnvironment: "jsdom",
-  setupFiles: ["<rootDir>/src/setupTests.js"],
+  setupFiles: ["<rootDir>/setupTests.js"],
 };

@@ -114,7 +114,6 @@ export const useSizeAndPosition = ({
           left: `calc(50%  - ${sizeInPx.frame.width}px / 2)`,
         };
       default:
-        const value = window.innerWidth - 64 - sizeInPx.frame.width;
         return {
           top: `calc(100vh - (${sizeInPx.frame.height}px + 64px))`,
           left: `calc(100vw - (${sizeInPx.frame.width}px + 64px))`,
@@ -158,7 +157,7 @@ export const useDragAndDrop = (draggable: boolean) => {
     /**
      * this removes mousemove event listener
      */
-    const onMouseUp = (e: MouseEvent) => {
+    const onMouseUp = () => {
       // console.log("mouseup!");
       div.removeEventListener("mousemove", onMouseMove);
     };

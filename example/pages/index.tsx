@@ -1,10 +1,10 @@
-import Device from "./lib/component/Device/Device";
-import VideoUrl from "./assets/demo.mp4";
+import type { NextPage } from "next";
 
-import "./App.css";
-import { useDeviceType, useDrag, usePosition, useSize } from "./hooks";
+import Device from "react-fixed-device";
+import { useDeviceType, useDrag, usePosition, useSize } from "../hooks";
+import styles from "../styles/Home.module.css";
 
-function App() {
+const Home: NextPage = () => {
   const { size, changeSize } = useSize();
   const { position, changePosition } = usePosition();
   const { deviceType, changeDeviceType } = useDeviceType();
@@ -13,7 +13,7 @@ function App() {
   return (
     <>
       <Device
-        src={VideoUrl}
+        src="demo.mp4"
         type={deviceType}
         color="#184e77"
         loop
@@ -24,8 +24,8 @@ function App() {
         position={position}
         onVideoEnd={() => console.log("video ends!")}
       />
-      <div className="app">
-        <header className="header">
+      <div className={styles.app}>
+        <header className={styles.header}>
           <div
             style={{
               display: "flex",
@@ -42,14 +42,14 @@ function App() {
             </button>
           </div>
         </header>
-        <div className="section color1"></div>
-        <div className="section color2"></div>
-        <div className="section color3"></div>
-        <div className="section color4"></div>
-        <div className="section color5"></div>
+        <div className={[styles.section, styles.color1].join(" ")}></div>
+        <div className={[styles.section, styles.color2].join(" ")}></div>
+        <div className={[styles.section, styles.color3].join(" ")}></div>
+        <div className={[styles.section, styles.color4].join(" ")}></div>
+        <div className={[styles.section, styles.color5].join(" ")}></div>
       </div>
     </>
   );
-}
+};
 
-export default App;
+export default Home;

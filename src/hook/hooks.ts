@@ -52,14 +52,14 @@ export const useSizeAndPosition = ({
       case "sm":
         return {
           frame: {
-            width: 60,
+            width: 55,
             height: 120,
             borderRadius: 14,
             padding: 4,
           },
           notch: {
-            height: 8,
-            borderRadius: 4,
+            height: 5,
+            borderRadius: 3,
           },
           screen: {
             borderRadius: 10,
@@ -68,14 +68,14 @@ export const useSizeAndPosition = ({
       case "md":
         return {
           frame: {
-            width: 120,
+            width: 110,
             height: 240,
             borderRadius: 22,
             padding: 6,
           },
           notch: {
-            height: 12,
-            borderRadius: 8,
+            height: 9,
+            borderRadius: 6,
           },
           screen: {
             borderRadius: 16,
@@ -83,16 +83,17 @@ export const useSizeAndPosition = ({
         };
 
       default:
+        // large
         return {
           frame: {
-            width: 240,
+            width: 220,
             height: 480,
             borderRadius: 32,
             padding: 8,
           },
           notch: {
-            height: 24,
-            borderRadius: 16,
+            height: 16,
+            borderRadius: 12,
           },
           screen: {
             borderRadius: 24,

@@ -54,15 +54,15 @@ export const useSizeAndPosition = ({
           frame: {
             width: 55,
             height: 120,
-            borderRadius: 14,
-            padding: 4,
+            borderRadius: 9,
+            padding: 3,
           },
           notch: {
             height: 5,
             borderRadius: 3,
           },
           screen: {
-            borderRadius: 10,
+            borderRadius: 5,
           },
         };
       case "md":
@@ -70,15 +70,15 @@ export const useSizeAndPosition = ({
           frame: {
             width: 110,
             height: 240,
-            borderRadius: 22,
-            padding: 6,
+            borderRadius: 18,
+            padding: 5,
           },
           notch: {
             height: 9,
             borderRadius: 6,
           },
           screen: {
-            borderRadius: 16,
+            borderRadius: 12,
           },
         };
 

@@ -13,11 +13,11 @@ const Home: NextPage = () => {
   return (
     <>
       <Device
-        src="demo.mp4"
+        src="demo_mobile.mp4"
         type={deviceType}
-        color="#184e77"
+        // color="#184e77"
         loop
-        autoPlay
+        // autoPlay
         control
         draggable={draggable}
         size={size}

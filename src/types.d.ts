@@ -17,3 +17,4 @@ export interface SizeInPx {
 export type Size = "sm" | "md" | "lg";
 export type Position = "bottomRight" | "bottomLeft" | "center";
 export type DeviceType = "default" | "notch" | "glass";
+export type DeviceMode = "portrait" | "landscape";

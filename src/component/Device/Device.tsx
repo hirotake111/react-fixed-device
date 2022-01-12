@@ -4,65 +4,16 @@ import {
   useSizeAndPosition,
   useVideoPlay,
 } from "../../hook/hooks";
-import { DeviceType, Position, Size } from "../../types";
+import { DeviceMode, DeviceType, Position, Size } from "../../types";
 import PlayIcon from "../PlayIcon/PlayIcon";
 
 import styles from "./Device.module.css";
-
-// const styles: { [key: string]: CSSProperties } = {
-//   reactFixedDevice: { position: "fixed", zIndex: 1 },
-//   reactFixedDevice__container: {
-//     position: "relative",
-//     width: "100%",
-//     height: "100%",
-//   },
-//   reactFixedDevice__frame: {
-//     display: "flex",
-//     justifyContent: "center",
-//     padding: "8px",
-//     width: "240px",
-//     height: "480px",
-//     borderRadius: "32px",
-//     boxShadow: "0 8px 32px 0 rgba(31, 38, 135, 0.37)",
-//     backdropFilter: "blur(5.5px)",
-//     WebkitBackdropFilter: "blur(5.5px)",
-//   },
-//   reactFixedDevice__notch: {
-//     position: "absolute",
-//     width: "50%",
-//     height: "24px",
-//     borderRadius: "0 0 16px 16px",
-//   },
-//   reactFixedDevice__screen: {
-//     display: "flex",
-//     justifyContent: "center",
-//     width: "100%",
-//     height: "100%",
-//     borderRadius: "24px",
-//     backgroundColor: "#000",
-//     overflow: "hidden",
-//   },
-//   reactFixedDevice__playbutton: {
-//     position: "absolute",
-//     zIndex: 1,
-//     width: "100%",
-//     height: "100%",
-//     cursor: "pointer",
-//   },
-//   reactFixedDevice__playButton__container: {
-//     position: "relative",
-//     display: "flex",
-//     justifyContent: "center",
-//     alignItems: "center",
-//     width: "100%",
-//     height: "100%",
-//   },
-// };
 
 interface Props {
   src: string;
   poster?: string;
   type: DeviceType;
+  mode: DeviceMode;
   loop?: boolean;
   color?: string;
   size?: Size;
@@ -76,6 +27,7 @@ interface Props {
 export default function Device({
   src,
   type,
+  mode = "portrait",
   poster,
   loop = false,
   autoPlay = false,
@@ -88,7 +40,11 @@ export default function Device({
 }: Props) {
   const { ref, paused, play } = useVideoPlay(autoPlay, control);
   const { backgroundColor } = useBackgroundColor({ type, color });
-  const { sizeInPx, positionProps } = useSizeAndPosition({ size, position });
+  const { sizeInPx, positionProps } = useSizeAndPosition({
+    size,
+    position,
+    mode,
+  });
   const divRef = useDragAndDrop(draggable);
 
   return (

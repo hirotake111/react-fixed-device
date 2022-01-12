@@ -1,7 +1,13 @@
 import type { NextPage } from "next";
 
 import Device from "react-fixed-device";
-import { useDeviceType, useDrag, usePosition, useSize } from "../hooks";
+import {
+  useDeviceType,
+  useDrag,
+  usePosition,
+  useSize,
+  useDeviceMode,
+} from "../hooks";
 import styles from "../styles/Home.module.css";
 
 const Home: NextPage = () => {
@@ -9,11 +15,12 @@ const Home: NextPage = () => {
   const { position, changePosition } = usePosition();
   const { deviceType, changeDeviceType } = useDeviceType();
   const { draggable, toggleDraggable } = useDrag();
+  const { mode, toggleMode } = useDeviceMode();
 
   return (
     <>
       <Device
-        src="demo_mobile.mp4"
+        src="demo.mp4"
         type={deviceType}
         // color="#184e77"
         loop
@@ -22,6 +29,7 @@ const Home: NextPage = () => {
         draggable={draggable}
         size={size}
         position={position}
+        mode={mode}
         onVideoEnd={() => console.log("video ends!")}
       />
       <div className={styles.app}>
@@ -35,6 +43,7 @@ const Home: NextPage = () => {
             }}
           >
             <button onClick={changeSize}>size: {size}</button>
+            <button onClick={toggleMode}>mode: {mode}</button>
             <button onClick={changePosition}>position: {position}</button>
             <button onClick={changeDeviceType}>type: {deviceType}</button>
             <button onClick={toggleDraggable}>

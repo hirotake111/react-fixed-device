@@ -1,5 +1,13 @@
 import { useState } from "react";
-import { DeviceType, Position, Size } from "./lib/types";
+import { DeviceType, Position, Size, DeviceMode } from "../src/types";
+
+export const useDeviceMode = () => {
+  const [mode, setMode] = useState<DeviceMode>("portrait");
+  const toggleMode = () => {
+    setMode(mode === "portrait" ? "landscape" : "portrait");
+  };
+  return { mode, toggleMode };
+};
 
 export const useSize = () => {
   const [size, setSize] = useState<Size>("md");

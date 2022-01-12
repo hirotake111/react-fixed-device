@@ -1,9 +1,10 @@
 import { CSSProperties, useEffect, useMemo, useRef, useState } from "react";
-import { DeviceType, Position, Size, SizeInPx } from "../types";
+import { DeviceMode, DeviceType, Position, Size, SizeInPx } from "../types";
 
 export const useVideoPlay = (autoPlay: boolean, control: boolean) => {
   const ref = useRef<HTMLVideoElement>(null);
   const [paused, setPaused] = useState(!autoPlay);
+
   /**
    * plays video if it's paused, else stop it.
    */
@@ -43,17 +44,101 @@ export const useBackgroundColor = ({
 export const useSizeAndPosition = ({
   size,
   position,
+  mode,
 }: {
   size?: Size;
   position?: Position;
+  mode: DeviceMode;
 }) => {
+  // this will determine if the window is mobile
+  const [mobile, setMobile] = useState<boolean>(false);
+
+  // this will get width of the window
+  useEffect(() => {
+    if (window && window.innerWidth) setMobile(window.innerWidth < 800);
+  }, [setMobile]);
+
   const sizeInPx: SizeInPx = useMemo(() => {
+    if (mode === "portrait") {
+      // portrait mode
+      const mediumPortrait = {
+        frame: {
+          width: 110,
+          height: 240,
+          borderRadius: 18,
+          padding: 5,
+        },
+        notch: {
+          height: 9,
+          borderRadius: 6,
+        },
+        screen: {
+          borderRadius: 12,
+        },
+      };
+      switch (size) {
+        case "sm":
+          return {
+            frame: {
+              width: 55,
+              height: 120,
+              borderRadius: 9,
+              padding: 3,
+            },
+            notch: {
+              height: 5,
+              borderRadius: 3,
+            },
+            screen: {
+              borderRadius: 5,
+            },
+          };
+        case "md": // medium portrait
+          return mediumPortrait;
+
+        default:
+          // large portrait
+          return mobile
+            ? mediumPortrait
+            : {
+                frame: {
+                  width: 220,
+                  height: 480,
+                  borderRadius: 32,
+                  padding: 8,
+                },
+                notch: {
+                  height: 16,
+                  borderRadius: 12,
+                },
+                screen: {
+                  borderRadius: 24,
+                },
+              };
+      }
+    }
+    // otherwise, landscape mode
+    const mediumLandscape = {
+      frame: {
+        width: 190,
+        height: 110,
+        borderRadius: 18,
+        padding: 5,
+      },
+      notch: {
+        height: 9,
+        borderRadius: 6,
+      },
+      screen: {
+        borderRadius: 12,
+      },
+    };
     switch (size) {
-      case "sm":
+      case "sm": // small landscape
         return {
           frame: {
-            width: 55,
-            height: 120,
+            width: 96,
+            height: 55,
             borderRadius: 9,
             padding: 3,
           },
@@ -65,42 +150,29 @@ export const useSizeAndPosition = ({
             borderRadius: 5,
           },
         };
-      case "md":
-        return {
-          frame: {
-            width: 110,
-            height: 240,
-            borderRadius: 18,
-            padding: 5,
-          },
-          notch: {
-            height: 9,
-            borderRadius: 6,
-          },
-          screen: {
-            borderRadius: 12,
-          },
-        };
-
+      case "md": // medium landscape
+        return mediumLandscape;
       default:
-        // large
-        return {
-          frame: {
-            width: 220,
-            height: 480,
-            borderRadius: 32,
-            padding: 8,
-          },
-          notch: {
-            height: 16,
-            borderRadius: 12,
-          },
-          screen: {
-            borderRadius: 24,
-          },
-        };
+        // large landscape
+        return mobile
+          ? mediumLandscape
+          : {
+              frame: {
+                width: 420,
+                height: 240,
+                borderRadius: 32,
+                padding: 8,
+              },
+              notch: {
+                height: 16,
+                borderRadius: 12,
+              },
+              screen: {
+                borderRadius: 24,
+              },
+            };
     }
-  }, [size]);
+  }, [size, mode]);
 
   const positionProps = useMemo<CSSProperties>(() => {
     switch (position) {

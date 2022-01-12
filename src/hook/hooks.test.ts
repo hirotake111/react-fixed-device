@@ -79,24 +79,24 @@ describe("useSizeAndPosition", () => {
     expect.assertions(2);
     const {
       result: { current },
-    } = renderHook(() => useSizeAndPosition({}));
+    } = renderHook(() => useSizeAndPosition({ mode: "portrait" }));
     expect(current.sizeInPx).toEqual({
       frame: {
-        width: 240,
+        width: 220,
         height: 480,
         borderRadius: 32,
         padding: 8,
       },
       notch: {
-        height: 24,
-        borderRadius: 16,
+        height: 16,
+        borderRadius: 12,
       },
       screen: {
         borderRadius: 24,
       },
     });
     expect(current.positionProps).toEqual({
-      left: "calc(100vw - (240px + 64px))",
+      left: "calc(100vw - (220px + 64px))",
       top: "calc(100vh - (480px + 64px))",
     });
   });
@@ -105,105 +105,111 @@ describe("useSizeAndPosition", () => {
     expect.assertions(2);
     const {
       result: { current },
-    } = renderHook(() => useSizeAndPosition({ size: "sm" }));
+    } = renderHook(() => useSizeAndPosition({ size: "sm", mode: "portrait" }));
     expect(current.sizeInPx).toEqual({
       frame: {
-        width: 60,
+        width: 55,
         height: 120,
-        borderRadius: 14,
-        padding: 4,
+        borderRadius: 9,
+        padding: 3,
       },
       notch: {
-        height: 8,
-        borderRadius: 4,
+        height: 5,
+        borderRadius: 3,
       },
       screen: {
-        borderRadius: 10,
+        borderRadius: 5,
       },
     });
     expect(current.positionProps).toEqual({
-      left: "calc(100vw - (60px + 64px))",
+      left: "calc(100vw - (55px + 64px))",
       top: "calc(100vh - (120px + 64px))",
     });
   });
-});
 
-it("should return medium size and position", () => {
-  expect.assertions(2);
-  const {
-    result: { current },
-  } = renderHook(() => useSizeAndPosition({ size: "md" }));
-  expect(current.sizeInPx).toEqual({
-    frame: {
-      width: 120,
-      height: 240,
-      borderRadius: 22,
-      padding: 6,
-    },
-    notch: {
-      height: 12,
-      borderRadius: 8,
-    },
-    screen: {
-      borderRadius: 16,
-    },
+  it("should return medium size and position", () => {
+    expect.assertions(2);
+    const {
+      result: { current },
+    } = renderHook(() => useSizeAndPosition({ size: "md", mode: "portrait" }));
+    expect(current.sizeInPx).toEqual({
+      frame: {
+        width: 110,
+        height: 240,
+        borderRadius: 18,
+        padding: 5,
+      },
+      notch: {
+        height: 9,
+        borderRadius: 6,
+      },
+      screen: {
+        borderRadius: 12,
+      },
+    });
+    expect(current.positionProps).toEqual({
+      left: "calc(100vw - (110px + 64px))",
+      top: "calc(100vh - (240px + 64px))",
+    });
   });
-  expect(current.positionProps).toEqual({
-    left: "calc(100vw - (120px + 64px))",
-    top: "calc(100vh - (240px + 64px))",
-  });
-});
 
-it("should update positionProps if postion is 'bottomLeft'", () => {
-  expect.assertions(2);
-  const {
-    result: { current },
-  } = renderHook(() =>
-    useSizeAndPosition({ size: "md", position: "bottomLeft" })
-  );
-  expect(current.sizeInPx).toEqual({
-    frame: {
-      width: 120,
-      height: 240,
-      borderRadius: 22,
-      padding: 6,
-    },
-    notch: {
-      height: 12,
-      borderRadius: 8,
-    },
-    screen: {
-      borderRadius: 16,
-    },
+  it("should update positionProps if postion is 'bottomLeft'", () => {
+    expect.assertions(2);
+    const {
+      result: { current },
+    } = renderHook(() =>
+      useSizeAndPosition({
+        size: "md",
+        position: "bottomLeft",
+        mode: "portrait",
+      })
+    );
+    expect(current.sizeInPx).toEqual({
+      frame: {
+        width: 110,
+        height: 240,
+        borderRadius: 18,
+        padding: 5,
+      },
+      notch: {
+        height: 9,
+        borderRadius: 6,
+      },
+      screen: {
+        borderRadius: 12,
+      },
+    });
+    expect(current.positionProps).toEqual({
+      left: "32px",
+      top: "calc(100vh - (240px + 64px))",
+    });
   });
-  expect(current.positionProps).toEqual({
-    left: "32px",
-    top: "calc(100vh - (240px + 64px))",
-  });
-});
 
-it("should change positionProps if position is 'Center", () => {
-  expect.assertions(2);
-  const {
-    result: { current },
-  } = renderHook(() => useSizeAndPosition({ size: "md", position: "center" }));
-  expect(current.sizeInPx).toEqual({
-    frame: {
-      width: 120,
-      height: 240,
-      borderRadius: 22,
-      padding: 6,
-    },
-    notch: {
-      height: 12,
-      borderRadius: 8,
-    },
-    screen: {
-      borderRadius: 16,
-    },
-  });
-  expect(current.positionProps).toEqual({
-    top: `calc(50% - 240px / 2)`,
-    left: `calc(50%  - 120px / 2)`,
+  it("should change positionProps if position is 'Center", () => {
+    expect.assertions(2);
+    const {
+      result: { current },
+    } = renderHook(() =>
+      useSizeAndPosition({ size: "md", position: "center", mode: "portrait" })
+    );
+    expect(current.sizeInPx).toEqual({
+      frame: {
+        width: 110,
+        height: 240,
+        borderRadius: 18,
+        padding: 5,
+      },
+      notch: {
+        height: 9,
+        borderRadius: 6,
+      },
+      screen: {
+        borderRadius: 12,
+      },
+    });
+    expect(current.positionProps).toEqual({
+      top: `calc(50% - 240px / 2)`,
+      left: `calc(50%  - 110px / 2)`,
+    });
   });
 });

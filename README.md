@@ -39,6 +39,7 @@ export const App() {
 | ---------- | ----------------------------------- | ---------------------------------- | ------------- | -------------- |
 | src        | string                              | (Required) Path to mp4 file        | -             | ./video.mp4    |
 | type       | "default" "notch" "glass"           | Type of device                     | "default"     | "glass"        |
+| mode       | "portrait" "landscape"              | Portrait mode or Landscape mode    | "portrait"    | "landscape"    |
 | poster     | string                              | Poster image                       | -             | "./poster.png" |
 | loop       | boolean                             | Determine if video is on repeat    | false         | true           |
 | autoPlay   | boolean                             | Auto play or not                   | false         | true           |

@@ -13,7 +13,7 @@ interface Props {
   src: string;
   poster?: string;
   type: DeviceType;
-  mode: DeviceMode;
+  mode?: DeviceMode;
   loop?: boolean;
   color?: string;
   size?: Size;

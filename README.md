@@ -37,7 +37,7 @@ export const App() {
 
 | Property   | type                                | Description                        | Default       | Example        |
 | ---------- | ----------------------------------- | ---------------------------------- | ------------- | -------------- |
-| src        | string                              | (Required) Path to mp4 file        | -             | ./video.mp4    |
+| src        | string                              | (Required) Path to mp4 file        | -             | "./video.mp4"  |
 | type       | "default" "notch" "glass"           | Type of device                     | "default"     | "glass"        |
 | mode       | "portrait" "landscape"              | Portrait mode or Landscape mode    | "portrait"    | "landscape"    |
 | poster     | string                              | Poster image                       | -             | "./poster.png" |

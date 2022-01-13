@@ -41,6 +41,7 @@
 
 .reactFixedDevice__notch {
   position: absolute;
+  z-index: 1;
   width: 50%;
   height: 24px;
   border-radius: 0 0 16px 16px;
@@ -62,6 +63,7 @@
 }
 
 .reactFixedDevice__screen {
+  position: relative;
   display: flex;
   justify-content: center;
   width: 100%;

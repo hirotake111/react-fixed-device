@@ -94,8 +94,9 @@ export default function Device({
               muted
               loop={loop}
               ref={ref}
-              style={{ objectFit: "cover" }}
+              // style={{ objectFit: "cover" }}
               onEnded={onVideoEnd}
+              playsInline
             ></video>
           </div>
         </div>

@@ -120,7 +120,7 @@ export const useSizeAndPosition = ({
     // otherwise, landscape mode
     const mediumLandscape = {
       frame: {
-        width: 190,
+        width: 186,
         height: 110,
         borderRadius: 18,
         padding: 5,
@@ -137,7 +137,7 @@ export const useSizeAndPosition = ({
       case "sm": // small landscape
         return {
           frame: {
-            width: 96,
+            width: 93,
             height: 55,
             borderRadius: 9,
             padding: 3,
@@ -158,7 +158,7 @@ export const useSizeAndPosition = ({
           ? mediumLandscape
           : {
               frame: {
-                width: 420,
+                width: 412,
                 height: 240,
                 borderRadius: 32,
                 padding: 8,

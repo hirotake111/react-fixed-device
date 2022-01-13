@@ -2,10 +2,9 @@
 
 A custom device-shaped component that will play video file
 
-- Simple usage
-- Currently React TypeScript only
-
 ![demo](img/rfd_demo.gif)
+
+All you need is to specify mp4 file😄
 
 ### Installation
 
@@ -52,15 +51,6 @@ export const App() {
 
 - if you set type "glass", color prop will not be honored.
 - if you set loop true, onVideEnd will not be performed.
-
-### Development notes
-
-```bash
-cd node_modules/react-dom && yarn link
-cd ../react-dom/ && yarn link
-
-cd ../../example && yarn link react && yarn react-dom
-```
 
 ### License
 
